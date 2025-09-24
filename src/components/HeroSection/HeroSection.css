@@ -1,0 +1,130 @@
+/* Hero Section Styles - Dora Modas */
+.hero {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  color: var(--text-light);
+  padding: 120px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, var(--secondary-color) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, var(--light-pink) 0%, transparent 50%);
+  opacity: 0.1;
+}
+
+.hero-header {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 10;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.brand-logo h1 {
+  font-size: 4.5rem;
+  margin-bottom: 10px;
+  font-weight: 800;
+  background: linear-gradient(45deg, var(--text-light), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.brand-tagline {
+  display: block;
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+  font-weight: 500;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.hero-content p {
+  font-size: 1.4rem;
+  margin-bottom: 40px;
+  opacity: 0.95;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 50px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat-number {
+  font-size: 3rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.stat-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--secondary-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .brand-logo h1 {
+    font-size: 3.5rem;
+  }
+  
+  .brand-tagline {
+    font-size: 1rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+  
+  .hero-stats {
+    gap: 40px;
+  }
+  
+  .hero-header {
+    top: 20px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-logo h1 {
+    font-size: 2.8rem;
+  }
+  
+  .hero-stats {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .hero-header {
+    top: 15px;
+    right: 15px;
+  }
+}

@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: default; /* Cursor padrão para todos os elementos */
+}
+
+/* Cursor de texto apenas para elementos editáveis */
+input, textarea, [contenteditable="true"] {
+  cursor: text !important;
+}
+
+/* Cursor pointer para elementos clicáveis */
+button, a, [role="button"], .clickable {
+  cursor: pointer !important;
+}
+
+/* Previne seleção de texto em elementos não editáveis */
+h1, h2, h3, h4, h5, h6, p, span, div, label {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Permite seleção apenas em elementos de texto editáveis */
+input, textarea, [contenteditable="true"], .selectable {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+  font-size: 1.1rem; /* Increased base font size */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+  
+:root {
+  font-size: 62.5%;
+  /* Dora Modas Color Scheme */
+  --primary-color: #FF8C42; /* Dark Orange */
+  --secondary-color: #FFB3BA; /* Light Pink */
+  --accent-color: #FF6B35; /* Darker Orange for highlights */
+  --light-pink: #FFF0F3; /* Very light pink for backgrounds */
+  --text-dark: #2C2C2C;
+  --text-light: #FFFFFF;
+  --background-light: #FAFAFA;
+  --background-dark: #1A1A1A;
+}
