@@ -1,7 +1,7 @@
 import { User, Item, ItemsResponse, GetItemResponse, ApiError, LoginRequest, LoginResponse, AddItemRequest, AddItemResponse, DeleteItemResponse, UpdateItemRequest, UpdateItemResponse } from '../types/api';
 
 // API Configuration
-const API_BASE_URL = 'http://localhost:5050';
+const API_BASE_URL = 'https://doramodas.com/api';
 
 // Helper function to get access token from localStorage
 const getAccessToken = (): string | null => {
