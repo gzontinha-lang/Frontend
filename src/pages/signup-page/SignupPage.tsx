@@ -1,14 +1,19 @@
 import './SignupPage.css'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { signupUser } from '../../api/requests'
 
 export default function SignupPage() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
+    passwordConfirmation: '',
     age: ''
   })
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -18,11 +23,36 @@ export default function SignupPage() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: Connect to backend later
-    console.log('Signup form data:', formData)
-    alert('Cadastro será implementado com o backend!')
+    setIsLoading(true)
+    setError('')
+    
+    try {
+      // Validação básica
+      if (!formData.name || !formData.email || !formData.password || !formData.passwordConfirmation) {
+        throw new Error('Por favor, preencha todos os campos obrigatórios')
+      }
+
+      if (formData.password !== formData.passwordConfirmation) {
+        throw new Error('As senhas não coincidem. Por favor, verifique.')
+      }
+
+      if (formData.password.length < 6) {
+        throw new Error('A senha deve ter pelo menos 6 caracteres')
+      }
+
+      await signupUser(formData.name, formData.email, formData.password, formData.passwordConfirmation)
+      
+      // Sucesso - redirecionar para login
+      alert('Cadastro realizado com sucesso! Faça login para continuar.')
+      navigate('/login')
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Erro ao criar conta'
+      setError(errorMessage)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -37,6 +67,8 @@ export default function SignupPage() {
         </div>
 
         <form className="signup-form" onSubmit={handleSubmit}>
+          {error && <div className="error-message" style={{color: 'red', marginBottom: '1rem', textAlign: 'center', padding: '0.5rem', backgroundColor: '#ffe6e6', border: '1px solid #ff9999', borderRadius: '4px'}}>{error}</div>}
+          
           <div className="form-group">
             <label htmlFor="name">Nome Completo:</label>
             <input
@@ -78,6 +110,20 @@ export default function SignupPage() {
           </div>
 
           <div className="form-group">
+            <label htmlFor="passwordConfirmation">Confirmar Senha:</label>
+            <input
+              type="password"
+              id="passwordConfirmation"
+              name="passwordConfirmation"
+              value={formData.passwordConfirmation}
+              onChange={handleInputChange}
+              placeholder="Confirme sua senha"
+              required
+              minLength={6}
+            />
+          </div>
+
+          <div className="form-group">
             <label htmlFor="age">Idade:</label>
             <input
               type="number"
@@ -92,8 +138,8 @@ export default function SignupPage() {
             />
           </div>
 
-          <button type="submit" className="signup-button">
-            🚀 Criar Conta
+          <button type="submit" className="signup-button" disabled={isLoading}>
+            {isLoading ? '⏳ Criando conta...' : '🚀 Criar Conta'}
           </button>
 
           <div className="login-link">
