@@ -1,7 +1,7 @@
 import { User, Item, ItemsResponse, GetItemResponse, ApiError, LoginRequest, LoginResponse, AddItemRequest, AddItemResponse, DeleteItemResponse, UpdateItemRequest, UpdateItemResponse } from '../types/api';
 
 // API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_URL as string;
+const API_BASE_URL = 'https://doramodas.com/api';
 
 // Helper function to get access token from localStorage
 const getAccessToken = (): string | null => {
@@ -17,6 +17,33 @@ const createAuthHeaders = (): HeadersInit => {
   };
 };
 
+// Function to signup user
+export const signupUser = async (name: string, email: string, password: string, passwordConfirmation: string) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/users/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+        passwordConfirmation
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error during signup:', error);
+    throw error;
+  }
+};
 // Function to get current user data
 export const getCurrentUser = async (): Promise<User> => {
   const token = getAccessToken();
