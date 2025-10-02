@@ -1,7 +1,7 @@
 import { User, Item, ItemsResponse, GetItemResponse, ApiError, LoginRequest, LoginResponse, AddItemRequest, AddItemResponse, DeleteItemResponse, UpdateItemRequest, UpdateItemResponse } from '../types/api';
 
 // API Configuration
-const API_BASE_URL = 'https://doramodas.com/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL as string;
 
 // Helper function to get access token from localStorage
 const getAccessToken = (): string | null => {
