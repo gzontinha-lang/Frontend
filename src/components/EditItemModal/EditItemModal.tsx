@@ -1,5 +1,6 @@
 import './EditItemModal.css'
 import { UpdateItemRequest } from '../../types/api'
+import { ImageUpload } from '../ImageUpload'
 
 interface EditItemModalProps {
   isOpen: boolean
@@ -8,6 +9,8 @@ interface EditItemModalProps {
   onSubmit: (e: React.FormEvent) => void
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void
   onCancel: () => void
+  onImageUpload: (imageUrl: string) => void
+  itemId?: number
 }
 
 export default function EditItemModal({ 
@@ -16,7 +19,9 @@ export default function EditItemModal({
   formData, 
   onSubmit, 
   onChange, 
-  onCancel 
+  onCancel,
+  onImageUpload,
+  itemId
 }: EditItemModalProps) {
   if (!isOpen) return null
 
@@ -29,6 +34,16 @@ export default function EditItemModal({
         </div>
         
         <form className="edit-modal-form" onSubmit={onSubmit}>
+          <div className="edit-form-group">
+            <label>Imagem do Produto</label>
+            <ImageUpload 
+              onImageUpload={onImageUpload}
+              currentImageUrl={formData.imageUrl}
+              itemId={itemId}
+              disabled={isEditing}
+            />
+          </div>
+          
           <div className="edit-form-row">
             <div className="edit-form-group">
               <label htmlFor="edit-name">Nome do Produto</label>

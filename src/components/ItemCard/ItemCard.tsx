@@ -12,12 +12,30 @@ export default function ItemCard({ item, showBuyButton = false, isAdmin = false 
   return (
     <Link to={`/item/${item.id}`} className="item-card-link">
       <div className="item-card">
-      <div className="card-header">
-        {isAdmin && <span className="item-id">ID: {item.id}</span>}
-        <span className="item-price">R$ {parseFloat(item.price).toFixed(2)}</span>
-      </div>
-      
-      <h3 className="item-name">{item.name}</h3>
+        <div className="item-image-container">
+          {item.imageUrl ? (
+            <img 
+              src={item.imageUrl} 
+              alt={item.name}
+              className="item-image"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none'
+              }}
+            />
+          ) : (
+            <div className="item-image-placeholder">
+              <span className="placeholder-icon">📷</span>
+              <span className="placeholder-text">Sem imagem</span>
+            </div>
+          )}
+        </div>
+        
+        <div className="card-header">
+          {isAdmin && <span className="item-id">ID: {item.id}</span>}
+          <span className="item-price">R$ {parseFloat(item.price).toFixed(2)}</span>
+        </div>
+        
+        <h3 className="item-name">{item.name}</h3>
       
       <div className="item-details">
         <div className="detail-row">

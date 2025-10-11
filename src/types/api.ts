@@ -17,6 +17,7 @@ export interface Item {
   description: string;
   category: string;
   brand: string;
+  imageUrl?: string;
   createdAt: string;
 }
 
@@ -51,6 +52,7 @@ export interface AddItemRequest {
   category: string;
   brand: string;
   quantity: number;
+  imageUrl?: string;
 }
 
 export interface AddItemResponse {
@@ -70,6 +72,7 @@ export interface UpdateItemRequest {
   description: string;
   category: string;
   brand: string;
+  imageUrl?: string;
 }
 
 export interface UpdateItemResponse {

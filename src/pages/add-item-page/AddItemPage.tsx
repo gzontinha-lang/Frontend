@@ -27,6 +27,7 @@ export default function AddItemPage() {
     }))
   }
 
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')

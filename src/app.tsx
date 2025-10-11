@@ -5,6 +5,7 @@ import LoginPage from "./pages/login-page/LoginPage"
 import SignupPage from "./pages/signup-page/SignupPage"
 import AddItemPage from "./pages/add-item-page/AddItemPage"
 import ItemDetailPage from "./pages/item-detail-page/ItemDetailPage"
+import UploadImagePage from "./pages/upload-image-page/UploadImagePage"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/add-item" element={<AddItemPage />} />
           <Route path="/item/:id" element={<ItemDetailPage />} />
+          <Route path="/upload-image" element={<UploadImagePage />} />
         </Routes>
       </div>
     </Router>
