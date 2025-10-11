@@ -9,6 +9,7 @@ import Loading from '../../components/Loading/Loading'
 import ErrorAuthModal from '../../components/ErrorAuthModal/ErrorAuthModal'
 import DeleteConfirmationModal from '../../components/DeleteConfirmationModal/DeleteConfirmationModal'
 import EditItemModal from '../../components/EditItemModal/EditItemModal'
+import { ImageModal } from '../../components/ImageModal'
 
 export default function ItemDetailPage() {
   const { id } = useParams<{ id: string }>()
@@ -23,6 +24,7 @@ export default function ItemDetailPage() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
+  const [showImageModal, setShowImageModal] = useState(false)
   const [editFormData, setEditFormData] = useState<UpdateItemRequest>({
     name: '',
     price: 0,
@@ -31,7 +33,8 @@ export default function ItemDetailPage() {
     color: '',
     description: '',
     category: '',
-    brand: ''
+    brand: '',
+    imageUrl: ''
   })
 
   useEffect(() => {
@@ -125,7 +128,8 @@ export default function ItemDetailPage() {
         color: item.color,
         description: item.description,
         category: item.category,
-        brand: item.brand
+        brand: item.brand,
+        imageUrl: item.imageUrl || ''
       })
       setShowEditModal(true)
     }
@@ -141,6 +145,23 @@ export default function ItemDetailPage() {
       ...prev,
       [name]: type === 'number' ? parseFloat(value) || 0 : value
     }))
+  }
+
+  const handleEditImageUpload = (imageUrl: string) => {
+    setEditFormData(prev => ({
+      ...prev,
+      imageUrl
+    }))
+  }
+
+  const handleImageClick = () => {
+    if (item?.imageUrl) {
+      setShowImageModal(true)
+    }
+  }
+
+  const handleImageModalClose = () => {
+    setShowImageModal(false)
   }
 
   const handleEditSubmit = async (e: React.FormEvent) => {
@@ -239,6 +260,18 @@ export default function ItemDetailPage() {
           </div>
 
           <div className="item-detail-card">
+            {item.imageUrl && (
+              <div className="detail-image-section">
+                <img 
+                  src={item.imageUrl} 
+                  alt={item.name} 
+                  className="detail-item-image clickable"
+                  onClick={handleImageClick}
+                  title="Clique para ampliar"
+                />
+              </div>
+            )}
+            
             <div className="detail-main-info">
               <div className="detail-title-section">
                 {userIsAdmin && <span className="detail-item-id">ID: {item.id}</span>}
@@ -304,6 +337,12 @@ export default function ItemDetailPage() {
                 >
                   ✏️ Editar Item
                 </button>
+                <Link 
+                  to="/upload-image"
+                  className="detail-upload-button"
+                >
+                  📷 Upload Image
+                </Link>
                 <button 
                   className="detail-delete-button"
                   onClick={handleDeleteClick}
@@ -338,6 +377,15 @@ export default function ItemDetailPage() {
         onSubmit={handleEditSubmit}
         onChange={handleEditChange}
         onCancel={handleEditCancel}
+        onImageUpload={handleEditImageUpload}
+        itemId={item?.id}
+      />
+
+      <ImageModal
+        isOpen={showImageModal}
+        imageUrl={item?.imageUrl || ''}
+        imageAlt={item?.name || ''}
+        onClose={handleImageModalClose}
       />
     </div>
   )

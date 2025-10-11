@@ -72,6 +72,31 @@
   padding: 3rem;
 }
 
+.detail-image-section {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.detail-item-image {
+  max-width: 100%;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.detail-item-image.clickable {
+  cursor: pointer;
+}
+
+.detail-item-image.clickable:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
 .detail-main-info {
   margin-bottom: 3rem;
 }
@@ -342,6 +367,54 @@
   box-shadow: 0 8px 25px rgba(5, 150, 105, 0.2);
 }
 
+/* Upload Button */
+.detail-upload-button {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border: none;
+  padding: 1.2rem 3rem;
+  border-radius: 50px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+  position: relative;
+  overflow: hidden;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.detail-upload-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.detail-upload-button:hover::before {
+  left: 100%;
+}
+
+.detail-upload-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+}
+
+.detail-upload-button:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
 /* Modal styles moved to individual component files */
 
 /* Responsive Design */
@@ -387,6 +460,7 @@
   }
   
   .detail-edit-button,
+  .detail-upload-button,
   .detail-delete-button {
     width: 100%;
     max-width: 300px;
@@ -411,6 +485,7 @@
   }
   
   .detail-edit-button,
+  .detail-upload-button,
   .detail-delete-button {
     padding: 1rem 2rem;
     font-size: 1.1rem;
