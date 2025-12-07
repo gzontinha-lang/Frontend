@@ -158,6 +158,32 @@ export default function MainPage() {
     setPaginatedItems(itemsForCurrentPage)
   }, [filteredItems, currentPage, itemsPerPage])
 
+  // Scroll reveal animation for cards
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+          }
+        })
+      },
+      { 
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    )
+
+    // Observe all item cards
+    const cards = document.querySelectorAll('.item-card')
+    cards.forEach((card) => {
+      card.classList.add('scroll-reveal')
+      observer.observe(card)
+    })
+
+    return () => observer.disconnect()
+  }, [paginatedItems])
+
   // Reset to first page when search changes
   useEffect(() => {
     setCurrentPage(1)

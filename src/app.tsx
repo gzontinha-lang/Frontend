@@ -6,6 +6,7 @@ import SignupPage from "./pages/signup-page/SignupPage"
 import AddItemPage from "./pages/add-item-page/AddItemPage"
 import ItemDetailPage from "./pages/item-detail-page/ItemDetailPage"
 import UploadImagePage from "./pages/upload-image-page/UploadImagePage"
+import DebtorsPage from "./pages/debtors-page/DebtorsPage"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/add-item" element={<AddItemPage />} />
           <Route path="/item/:id" element={<ItemDetailPage />} />
           <Route path="/upload-image" element={<UploadImagePage />} />
+          <Route path="/debtors" element={<DebtorsPage />} />
         </Routes>
       </div>
     </Router>

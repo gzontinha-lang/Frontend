@@ -23,6 +23,10 @@ export default function Header({ authButton, isAdmin = false }: HeaderProps) {
                 <span className="upload-icon">📷</span>
                 <span className="upload-text">Upload Image</span>
               </Link>
+              <Link to="/debtors" className="admin-debtors-button">
+                <span className="debtors-icon">📝</span>
+                <span className="debtors-text">Devedores</span>
+              </Link>
             </>
           )}
           <div className="auth-section">

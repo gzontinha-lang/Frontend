@@ -1,11 +1,22 @@
 /* Login Page Styles */
 .login-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 50%, var(--secondary-color) 100%);
+  background-size: 200% 200%;
+  animation: gradientMove 10s ease infinite;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
+}
+
+@keyframes gradientMove {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .login-container {
@@ -14,10 +25,24 @@
 }
 
 .login-card {
-  background: white;
-  border-radius: 20px;
+  background: #ffeef5;
+  border-radius: 24px;
   padding: 40px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15),
+              0 8px 24px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.6s ease-out;
+  border: 2px solid rgba(255, 140, 66, 0.2);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .login-header {
@@ -57,16 +82,24 @@
 
 .form-group input {
   padding: 15px;
-  border: 2px solid #e1e5e9;
-  border-radius: 10px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 12px;
   font-size: 1rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(255, 140, 66, 0.15),
+              0 4px 12px rgba(255, 140, 66, 0.2);
+  transform: translateY(-2px);
+}
+
+.form-group input:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(255, 140, 66, 0.1);
 }
 
 .form-options {
@@ -112,21 +145,49 @@
 }
 
 .login-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
   color: white;
   border: none;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-top: 10px;
+  box-shadow: 0 8px 20px rgba(255, 140, 66, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.login-button:active::before {
+  width: 300px;
+  height: 300px;
 }
 
 .login-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(255, 140, 66, 0.4);
+  background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+}
+
+.login-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 /* Estilos de login social removidos - não mais necessários */
