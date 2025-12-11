@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Header from '../../components/Header/Header'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import ItemCard from '../../components/ItemCard/ItemCard'
+import Footer from '../../components/Footer/Footer'
 import { getAllItems, isAuthenticated, isAdmin } from '../../api/requests'
 import { Item } from '../../types/api'
 import ErrorAuthModal from '../../components/ErrorAuthModal/ErrorAuthModal'
@@ -268,6 +269,8 @@ export default function MainPage() {
           </>
         )}
       </main>
+
+      <Footer />
 
       <ErrorAuthModal 
         isOpen={showErrorModal}
