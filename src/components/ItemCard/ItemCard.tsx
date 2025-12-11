@@ -1,6 +1,6 @@
 import './ItemCard.css'
 import { Item } from '../../types/api'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 interface ItemCardProps {
   item: Item
@@ -8,10 +8,29 @@ interface ItemCardProps {
   isAdmin?: boolean
 }
 
+const WHATSAPP_NUMBER = '5511916850647'
+
 export default function ItemCard({ item, showBuyButton = false, isAdmin = false }: ItemCardProps) {
+  const navigate = useNavigate()
+
+  const handleWhatsAppClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    
+    const itemUrl = `${window.location.origin}/item/${item.id}`
+    const message = encodeURIComponent(`Tenho interesse nesse item\n\n${itemUrl}`)
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`
+    
+    window.open(whatsappUrl, '_blank')
+  }
+
+  const handleCardClick = () => {
+    navigate(`/item/${item.id}`)
+  }
+
   return (
-    <Link to={`/item/${item.id}`} className="item-card-link">
-      <div className="item-card">
+    <div className="item-card-wrapper">
+      <div className="item-card" onClick={handleCardClick}>
         <div className="item-image-container">
           {item.imageUrl ? (
             <img 
@@ -66,14 +85,24 @@ export default function ItemCard({ item, showBuyButton = false, isAdmin = false 
 
       <div className="card-footer">
         <span className="quantity">Estoque: {item.quantity}</span>
-        {isAdmin && (
-          <span className="date">
-            {new Date(item.createdAt).toLocaleDateString('pt-BR')}
-          </span>
-        )}
+        <div className="card-footer-right">
+          <button
+            className="whatsapp-button"
+            onClick={handleWhatsAppClick}
+            title="Falar no WhatsApp"
+          >
+            <span className="whatsapp-icon">💬</span>
+            <span className="whatsapp-text">WhatsApp</span>
+          </button>
+          {isAdmin && (
+            <span className="date">
+              {new Date(item.createdAt).toLocaleDateString('pt-BR')}
+            </span>
+          )}
+        </div>
       </div>
 
       </div>
-    </Link>
+    </div>
   )
 }

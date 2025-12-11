@@ -1,19 +1,6 @@
-/* Item Card Link */
-.item-card-link {
-  text-decoration: none;
-  color: inherit;
+/* Item Card Wrapper */
+.item-card-wrapper {
   display: block;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.item-card-link:hover {
-  text-decoration: none;
-  color: inherit;
-}
-
-.item-card-link * {
-  cursor: pointer;
 }
 
 /* Item Cards */
@@ -28,6 +15,7 @@
   position: relative;
   overflow: hidden;
   animation: fadeInUp 0.6s ease-out forwards;
+  cursor: pointer;
 }
 
 /* Animação de entrada para os cards */
@@ -218,6 +206,13 @@
   align-items: center;
   padding-top: 1rem;
   border-top: 2px solid var(--light-pink);
+  gap: 1rem;
+}
+
+.card-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .quantity {
@@ -232,6 +227,64 @@
 .date {
   font-size: 1rem; /* Increased from 0.8rem */
   color: #999;
+}
+
+/* WhatsApp Button */
+.whatsapp-button {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.whatsapp-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.whatsapp-button:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+.whatsapp-button:hover {
+  background: linear-gradient(135deg, #128C7E, #25D366);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-button:active {
+  transform: translateY(0) scale(1);
+}
+
+.whatsapp-icon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.whatsapp-text {
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 /* Card Actions */
@@ -325,5 +378,29 @@
   
   .item-price {
     font-size: 1.4rem;
+  }
+  
+  .whatsapp-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .whatsapp-text {
+    display: none;
+  }
+  
+  .whatsapp-icon {
+    font-size: 1.3rem;
+  }
+  
+  .card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .card-footer-right {
+    width: 100%;
+    justify-content: space-between;
   }
 }
