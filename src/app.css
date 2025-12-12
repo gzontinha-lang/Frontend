@@ -36,16 +36,26 @@ html, body {
   padding: 0;
   min-height: 100vh;
   height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(180deg, #FAFAFA 0%, #FFF0F3 50%, #FAFAFA 100%);
-  background-attachment: fixed;
+  background: #ffeef5;
   color: var(--text-dark);
   line-height: 1.6;
   font-size: 1.1rem; /* Increased base font size */
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Remover background-attachment: fixed no mobile */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+    background: #ffeef5;
+  }
 }
 
 .app {
